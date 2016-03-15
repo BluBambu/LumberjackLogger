@@ -1,7 +1,11 @@
 def main():
-    print test(234.0).is_integer()
+    print len(foo('boo', 'baz'))
+    print bar(234.2, 44).is_integer()
 
-def test(f):
-    return f
+def foo(a, b):
+    return a
+
+def bar(c, d):
+    return foo(c, 0)
 
 if __name__ == "__main__": main()

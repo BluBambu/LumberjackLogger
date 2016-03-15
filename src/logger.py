@@ -7,17 +7,20 @@ class Log:
         self.entries = []
         self.callback_func = None
 
-    def append(self, obj):
+    def append(self, obj, obj_str=None):
         if self.callback_func is not None:
             self.callback_func((obj, str(obj)))
-        self.entries.append((obj, str(obj)))
+        if obj_str is None:
+            self.entries.append((obj, str(obj)))
+        else:
+            self.entries.append((obj, obj_str))
         return self
 
     def to_string(self):
         str = ''
         for entry in self.entries:
             str += entry[1] + '\n'
-        return str
+        return str[:len(str) - 1]
 
     def print_log(self):
         print self.to_string()
@@ -52,11 +55,11 @@ def log_arg(log_name, obj, arg_counter):
         log_arg_map[log_name] = {}
     if arg_counter not in log_arg_map[log_name]:
         log_arg_map[log_name][arg_counter] = len(logs[log_name].entries)
-        logs[log_name].append((obj))
+        logs[log_name].append((obj, ), str(obj))
     else:
         logs[log_name].entries[log_arg_map[log_name][arg_counter]] = \
-            (logs[log_name].entries[log_arg_map[log_name][arg_counter]][0],
-             logs[log_name].entries[log_arg_map[log_name][arg_counter]][1] + (obj))
+            (logs[log_name].entries[log_arg_map[log_name][arg_counter]][0] + (obj, ),
+             logs[log_name].entries[log_arg_map[log_name][arg_counter]][1] + ', ' + str(obj))
     return obj
 
 def get_log(log_name):

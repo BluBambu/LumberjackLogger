@@ -1,9 +1,10 @@
 from logger import *
 
-log_functions = [('test', 'test_log')]
+log_functions = [('foo', 'function_log')]
 
-log_function_args = [('test', 'test_args_log')]
+log_function_args = [('bar', 'args_log'), ('foo', 'args_log')]
 
 def query():
-    get_log('test_log').print_log()
-    get_log('test_args_log').print_log()
+    print '\nlogs:'
+    get_log('function_log').print_log()
+    get_log('args_log').print_log()
