@@ -55,7 +55,7 @@ def log_function_arg(file_lines, function_name, log_name):
     return file_lines
 
 def extract_functions(file_lines, function_name):
-    function_pattern = re.compile(function_name + '\(.*\)')
+    function_pattern = re.compile(function_name + '\([a-zA-Z._$ 0-9]*\)')
     function_matches = re.finditer(function_pattern, file_lines)
     return reversed([method_match for method_match in function_matches])
 
