@@ -5,11 +5,8 @@ class Log:
     def __init__(self, log_name):
         self.log_name = log_name
         self.entries = []
-        self.callback_func = None
 
     def append(self, obj, obj_str=None):
-        if self.callback_func is not None:
-            self.callback_func((obj, str(obj)))
         if obj_str is None:
             self.entries.append((obj, str(obj)))
         else:
@@ -36,10 +33,6 @@ class Log:
 
     def map(self, func):
         self.entries = [func(entry) for entry in self.entries]
-        return self
-
-    def callback(self, func):
-        self.callback_func = func
         return self
 
 def log(log_name, obj):

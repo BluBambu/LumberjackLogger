@@ -1,23 +1,16 @@
 import atexit
 from logger import *
 def main():
-    print log('add_log', add(1, 2))
-    print mult(log_arg('mult_log', 5, 0), log_arg('mult_log', 1, 0))
+    for x in [1, 2, 0, -5, -190, 23, -33]:
+        log('no_negatives_log', no_negative_ret(x))
 
-def add(a, b):
-    return a + b
-
-def mult(c, d):
-    sum = 0
-    for i in range(c):
-        sum = log('add_log', add(sum, d))
-    return sum
+def no_negative_ret(x):
+    return x
 
 if __name__ == "__main__": main()
 def query():
-    print 'add log:'
-    get_log('add_log').print_log()
-    print 'mult log:'
-    get_log('mult_log').print_log()
+    def sqrt_filter(x):
+        return x[0] < 0
+    get_log('no_negatives_log').filter(sqrt_filter).print_log()
 atexit.register(query)
 

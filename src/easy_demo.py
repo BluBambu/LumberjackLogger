@@ -1,14 +1,8 @@
 def main():
-    print add(1, 2)
-    print mult(5, 1)
+    for x in [1, 2, 0, -5, -190, 23, -33]:
+        no_negative_ret(x)
 
-def add(a, b):
-    return a + b
-
-def mult(c, d):
-    sum = 0
-    for i in range(c):
-        sum = add(sum, d)
-    return sum
+def no_negative_ret(x):
+    return x
 
 if __name__ == "__main__": main()
