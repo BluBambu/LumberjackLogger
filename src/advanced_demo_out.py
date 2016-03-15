@@ -1,23 +1,14 @@
+import atexit
 from logger import *
+def main():
+    with open('./urls.txt') as f:
+        for url in f:
+            process(log_arg('url_log', url, 0))
 
-# Easy Demo
+def process(url):
+    print url
 
-# log_functions = [('add', 'add_log')]
-#
-# log_function_args = [('mult', 'mult_log')]
-#
-# def query():
-#     print 'add log:'
-#     get_log('add_log').print_log()
-#     print 'mult log:'
-#     get_log('mult_log').print_log()
-
-# Intermediate Demo
-
-log_functions = []
-
-log_function_args = [('process', 'url_log')]
-
+if __name__ == "__main__": main()
 def query():
 
     import re
@@ -42,6 +33,5 @@ def query():
     get_log('valid_url').print_log()
     print 'Invalid URLs:'
     get_log('invalid_url').print_log()
-
-# Advanced Demo
+atexit.register(query)
 
