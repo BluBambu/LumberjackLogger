@@ -1,4 +1,5 @@
 logs = {}
+log_arg_map = {}
 
 class Log:
     def __init__(self, log_name):
@@ -15,7 +16,7 @@ class Log:
     def to_string(self):
         str = ''
         for entry in self.entries:
-            str += entry[1]
+            str += entry[1] + '\n'
         return str
 
     def print_log(self):
@@ -42,6 +43,20 @@ def log(log_name, obj):
     if log_name not in logs:
         logs[log_name] = Log(log_name)
     logs[log_name].append(obj)
+    return obj
+
+def log_arg(log_name, obj, arg_counter):
+    if log_name not in logs:
+        logs[log_name] = Log(log_name)
+    if log_name not in log_arg_map:
+        log_arg_map[log_name] = {}
+    if arg_counter not in log_arg_map[log_name]:
+        log_arg_map[log_name][arg_counter] = len(logs[log_name].entries)
+        logs[log_name].append((obj))
+    else:
+        logs[log_name].entries[log_arg_map[log_name][arg_counter]] = \
+            (logs[log_name].entries[log_arg_map[log_name][arg_counter]][0],
+             logs[log_name].entries[log_arg_map[log_name][arg_counter]][1] + (obj))
     return obj
 
 def get_log(log_name):

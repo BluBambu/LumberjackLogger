@@ -41,6 +41,7 @@ def log_function(file_lines, function_name, log_name):
     return file_lines
 
 def log_function_arg(file_lines, function_name, log_name):
+    global unique_counter
     for function_match in extract_functions(file_lines, function_name):
         if not is_function_declaration(file_lines, function_match.end()):
             args = extract_args(function_match.group())
@@ -49,13 +50,14 @@ def log_function_arg(file_lines, function_name, log_name):
                 for arg in reversed(args):
                     arg_pattern = re.compile(re.escape(arg))
                     arg_match = arg_pattern.search(function_string)
-                    arg_pos = function_match.start() + arg_match.end()
                     file_lines = file_lines[:arg_match.start() + function_match.start()] + \
-                                 'log(\'' + log_name + '\', ' + arg + ')' + file_lines[arg_pos:]
+                                 'log_arg(\'' + log_name + '\', ' + arg + ', ' + str(unique_counter) + ')' +\
+                                 file_lines[arg_match.end() + function_match.start():]
+                unique_counter += 1
     return file_lines
 
 def extract_functions(file_lines, function_name):
-    function_pattern = re.compile(function_name + '\([a-zA-Z._$ 0-9]*\)')
+    function_pattern = re.compile(function_name + '\([a-zA-Z._$ 0-9\'\",]*\)')
     function_matches = re.finditer(function_pattern, file_lines)
     return reversed([method_match for method_match in function_matches])
 
