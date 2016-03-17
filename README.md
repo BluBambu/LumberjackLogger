@@ -23,4 +23,7 @@ python lumberjack.py <sourceFile> <injectQueryCode>
 ```
 ```<sourceFile>``` is the file with the source code to convert.<br />
 ```<injectQueryCode>``` should be ```true``` if the query code should be added to the end of script, can be any other value otherwise to not inject query code.<br /><br />
-After running the command, the modified source code will be printed out to the console. Simply pipe this output to a file and run it. Note that the *_out.py files for the demos is simply the output of tool for that respective demo.
+After running the command, the modified source code will be printed out to the console. Simply pipe this output to a file and run it. Note that the *_out.py files for the demos is simply the output of tool for that respective demo. For example, the contents of ```advanced_demo_out.py``` is the result of running:
+```
+python lumberjack.py advanced_demo.py true
+```
