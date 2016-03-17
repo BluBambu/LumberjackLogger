@@ -27,3 +27,6 @@ After running the command, the modified source code will be printed out to the c
 ```
 python lumberjack.py advanced_demo.py true
 ```
+
+## Screencast of Intermediate Demo
+https://github.com/BluBambu/LumberjackLogger/blob/master/screencast_intermediate_demo.mov
